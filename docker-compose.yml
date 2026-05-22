@@ -1,0 +1,35 @@
+services:
+  app:
+    container_name: persistencia-app
+    build:
+      context: docker/php-apache
+    volumes:
+      - ./src/:/var/www/html
+    ports:
+      - '8090:80'
+    networks:
+      - persistencia-net
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: persistencia-mysql
+    image: mysql:8.0
+    ports:
+      - '3309:3306'
+    environment:
+      MYSQL_DATABASE: notas
+      MYSQL_USER: notas
+      MYSQL_PASSWORD: notas
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - persistencia-mysql-data:/var/lib/mysql
+    networks:
+      - persistencia-net
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+
+networks:
+  persistencia-net:
+
+volumes:
+  persistencia-mysql-data:

@@ -1,0 +1,11 @@
+# CSRF clásico basado en sesión.
+#
+# El skeleton de Symfony 7.2 propone CSRF "stateless", pero ese modo necesita
+# un controlador Stimulus (JavaScript) para inyectar el token en el formulario.
+# Como este demo no incluye un build de JS, usamos el CSRF clásico por sesión:
+# funciona sin JavaScript y mantiene el "clone & run" simple.
+framework:
+    csrf_protection:
+        enabled: true
+    form:
+        csrf_protection: true

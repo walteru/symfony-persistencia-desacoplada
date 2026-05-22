@@ -1,0 +1,10 @@
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Nota: las exclusiones de Symfony (vendor/, var/, .env.local) están en src/.gitignore

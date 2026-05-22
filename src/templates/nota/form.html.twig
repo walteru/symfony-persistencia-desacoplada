@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ titulo_pagina }}{% endblock %}
+
+{% block body %}
+    <h1>{{ titulo_pagina }}</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.titulo) }}
+        {{ form_row(form.categoria) }}
+        {{ form_row(form.contenido) }}
+        <div class="acciones">
+            <button class="btn" type="submit">Guardar</button>
+            <a class="btn link" href="{{ path('nota_index') }}">Cancelar</a>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

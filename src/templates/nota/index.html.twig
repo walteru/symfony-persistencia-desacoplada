@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notas{% endblock %}
+
+{% block body %}
+    <h1>Notas</h1>
+    <p class="backend">
+        Guardando con el adaptador: <code>{{ backend|split('\\')|last }}</code>
+    </p>
+
+    <p><a class="btn" href="{{ path('nota_nueva') }}">+ Nueva nota</a></p>
+
+    {% if notas is empty %}
+        <p class="empty">Todavía no hay notas. Creá la primera.</p>
+    {% else %}
+        {% for nota in notas %}
+            <article class="card">
+                <h3>{{ nota.titulo }}</h3>
+                <span class="cat">{{ nota.categoria }}</span>
+                <p>{{ nota.contenido }}</p>
+                <div class="acciones">
+                    <a class="btn sec" href="{{ path('nota_editar', {id: nota.id}) }}">Editar</a>
+                    <form class="inline" method="post" action="{{ path('nota_eliminar', {id: nota.id}) }}"
+                          onsubmit="return confirm('¿Eliminar esta nota?')">
+                        <input type="hidden" name="_token" value="{{ csrf_token('eliminar' ~ nota.id) }}">
+                        <button class="btn link" type="submit">Eliminar</button>
+                    </form>
+                </div>
+            </article>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
